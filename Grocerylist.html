@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Grocery list!</title>
+    <style>
+        body {
+            background-color: mistyrose;
+            font-family: 'Courier New', Courier, monospace
+        }
+
+        .header {
+            text-align: center;
+            padding: 5px
+        }
+
+        .header img {
+            float: left;
+            padding: 5px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <img src="https://i.imgur.com/AhJQ0NW.png" alt="Grocery Icon " style="width:40px">
+        <img src="https://i.imgur.com/0Mje1Bv.png" alt="Sandwich Icon" style="width:40px">
+        <h3>Make a list girly!</h3>
+    </div>
+
+    <p>
+        What are you getting?? <input type="text" id="needs" onchange="
+            need = this.value">
+        <br>
+        <br>
+        Click on an item to cross it off :D
+        <br>
+        Click again to remove it!
+        <br>
+        <br>
+        <button style="font-family:'Courier New', Courier, monospace" type="button" id="needs" onclick="addItem()">You
+            need
+            me</button>
+
+        <button style="font-family: 'Courier New', Courier, monospace" type="button" id="clearAll"
+            onclick="clearAll()">Clear all your items</button>
+    </p>
+
+    <ul id="itemList"></ul>
+
+    <script>
+
+        function addItem() {
+            var input = document.getElementById("needs"); // get the text box
+            var list = document.getElementById("itemList"); // get the <ul>
+            var value = input.value.trim();
+
+            if (value !== "") {
+                // list.innerHTML += "<li>" + value + "</li>"; // add to list
+                var li = document.createElement("li");
+                li.textContent = value;
+
+                li.onclick = function () {
+                    if (li.style.textDecoration === "line-through") {
+                        list.removeChild(li);
+                    } else {
+                        li.style.textDecoration = "line-through";
+                    }
+                };
+
+                list.appendChild(li);
+                input.value = ""; // clear the text box
+            }
+        }
+
+        function clearAll() {
+            var list = document.getElementById("itemList");
+            list.innerHTML = ""; // clear all items on the list
+        }
+
+    </script>
+
+</body>
+
+</html>
